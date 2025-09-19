@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: register-app
-          image: francis0516/register-app-pipeline:12
+          image: francis0516/register-app-pipeline:13
           resources:
             limits:
               memory: "256Mi"
