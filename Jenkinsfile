@@ -17,13 +17,15 @@ pipeline {
                }
         }
 
-        stage("Update the Deployment Tags") {
+        stage('Update the Deployment Tags') {
             steps {
-                sh """
-                   cat deployment.yaml
-                   sed -i 's/${APP_NAME}.*/${APP_NAME}:${IMAGE_TAG}/g' deployment.yaml
-                   cat deployment.yaml
-                """
+                script {
+                    def BUILD_TAG = env.BUILD_NUMBER  // or use env.GIT_COMMIT
+                    sh """
+                        sed -i 's|image: francis0516/register-app-pipeline.*|image: francis0516/register-app-pipeline:${BUILD_TAG}|g' deployment.yaml
+                        cat deployment.yaml
+                    """
+                }
             }
         }
 
